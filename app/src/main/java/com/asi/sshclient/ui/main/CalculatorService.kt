@@ -7,7 +7,7 @@ import kotlin.math.pow
 import kotlin.math.round
 import kotlin.math.sqrt
 
-class MainModel {
+class CalculatorService {
     private var presentValue = ""
     private var previousValue = ""
     private var operation  = ""
@@ -21,7 +21,10 @@ class MainModel {
         if(presentValue.isBlank()) {
             if(operation.isNotBlank()) {
                 inLineHistory = when(operation) {
-                    "√" -> inLineHistory.dropLast(1)
+                    "√" -> {
+                        operation = ""
+                        inLineHistory.drop(1)
+                    }
                     else -> {
                         presentValue = previousValue
                         operation = ""
@@ -111,17 +114,20 @@ class MainModel {
     fun calculateResult() {
         var result = ""
         if(operation.isBlank()) return
-        if(previousValue.last() == 'E') {
-            previousValue = previousValue.dropLast(1)
-            inLineHistory = inLineHistory.replace("E", "")
-        }
-
 
         try {
             if (presentValue.isNotBlank()) presentValue.toDouble()
             if (previousValue.isNotBlank()) previousValue.toDouble()
         } catch (e: NumberFormatException) {
             return
+        }
+
+        if(previousValue.isNotBlank() && previousValue.last() == 'E') {
+            previousValue = previousValue.dropLast(1)
+            inLineHistory = inLineHistory.replace("E", "")
+        } else if(presentValue.last() == 'E') {
+            presentValue = presentValue.dropLast(1)
+            inLineHistory = inLineHistory.replace("E", "")
         }
 
         when(operation) {
@@ -147,6 +153,7 @@ class MainModel {
                     updateResults("NaN", "")
                     return
                 }
+
 
                 result = sqrt(temp).toString()
             }

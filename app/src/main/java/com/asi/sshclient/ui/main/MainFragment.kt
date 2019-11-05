@@ -27,85 +27,25 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        number0.setOnClickListener {
-            viewModel.onNumberClick(0)
-        }
+        val opArray = mapOf<View, String>(add to "+", subtract to "-", divide to "/",
+            multiply to "*", sqrt to "√", power to "^")
 
-        number1.setOnClickListener {
-            viewModel.onNumberClick(1)
-        }
+        val numArray = arrayOf<View>(number0, number1, number2, number3, number4, number5,
+            number6, number7, number8, number9)
 
-        number2.setOnClickListener {
-            viewModel.onNumberClick(2)
-        }
+        for(i in 0..9)
+            numArray[i].setOnClickListener{ viewModel.onNumberClick(i) }
 
-        number3.setOnClickListener {
-            viewModel.onNumberClick(3)
-        }
+        for (operation in opArray)
+            operation.key.setOnClickListener{ viewModel.onOperationClick(operation.value) }
 
-        number4.setOnClickListener {
-            viewModel.onNumberClick(4)
-        }
+        decimalPoint.setOnClickListener { viewModel.onDecimalPointClick() }
 
-        number5.setOnClickListener {
-            viewModel.onNumberClick(5)
-        }
+        equals.setOnClickListener { viewModel.onEqualsClick() }
 
-        number6.setOnClickListener {
-            viewModel.onNumberClick(6)
-        }
+        delete.setOnClickListener { viewModel.onClearClick() }
 
-        number7.setOnClickListener {
-            viewModel.onNumberClick(7)
-        }
-
-        number8.setOnClickListener {
-            viewModel.onNumberClick(8)
-        }
-
-        number9.setOnClickListener {
-            viewModel.onNumberClick(9)
-        }
-
-        decimalPoint.setOnClickListener {
-            viewModel.onDecimalPointClick()
-        }
-
-        add.setOnClickListener {
-            viewModel.onOperationClick("+")
-        }
-
-        subtract.setOnClickListener {
-            viewModel.onOperationClick("-")
-        }
-
-        divide.setOnClickListener {
-            viewModel.onOperationClick("/")
-        }
-
-        multiply.setOnClickListener {
-            viewModel.onOperationClick("*")
-        }
-
-        sqrt.setOnClickListener {
-            viewModel.onOperationClick("√")
-        }
-
-        power.setOnClickListener {
-            viewModel.onOperationClick("^")
-        }
-
-        equals.setOnClickListener {
-            viewModel.onEqualsClick()
-        }
-
-        delete.setOnClickListener {
-            viewModel.onClearClick()
-        }
-
-        delete.setOnLongClickListener {
-            viewModel.onLongCLearClick()
-        }
+        delete.setOnLongClickListener { viewModel.onLongCLearClick() }
 
         history.movementMethod = ScrollingMovementMethod()
     }
@@ -117,7 +57,6 @@ class MainFragment : Fragment() {
             viewModel.inLineHistory.observe(this, Observer<String> { t -> formula.text = t })
             viewModel.history.observe(this, Observer<String> { t -> history.text = t })
         }
-
     }
 
 }

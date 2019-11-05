@@ -7,7 +7,7 @@ class MainViewModel : ViewModel() {
 
     var inLineHistory = MutableLiveData<String> ()
     var history = MutableLiveData<String> ()
-    var mainModel = MainModel()
+    var mainModel = CalculatorService()
 
     fun onLongCLearClick() : Boolean {
         mainModel.clearAll()
