@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AuthFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="299dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="66dp"
+            android:layout_height="23dp"
+            android:layout_gravity="1"
+            android:layout_marginEnd="16dp"
+            android:text="host"
+            app:layout_constraintEnd_toStartOf="@+id/hostInput"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="117dp" />
+
+        <TextView
+            android:id="@+id/user"
+            android:layout_width="69dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="52dp"
+            android:text="user"
+            app:layout_constraintEnd_toStartOf="@+id/userInput"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/userInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="96dp"
+            android:ems="10"
+            android:hint="Enter user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+
+        <EditText
+            android:id="@+id/hostInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="108dp"
+            android:layout_marginEnd="96dp"
+            android:ems="10"
+            android:hint="Enter host"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="69dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="52dp"
+            android:text="user"
+            app:layout_constraintEnd_toStartOf="@+id/userInput"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="172dp"
+            android:layout_marginEnd="96dp"
+            android:ems="10"
+            android:hint="Enter password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></EditText>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="20dp"
+            android:onClick="submit"
+            android:text="Submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/error"
+            android:layout_width="340dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="4dp"
+            android:text=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
