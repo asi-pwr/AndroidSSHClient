@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 
 class AuthFragment(val authReceiver: AuthReceiver) : Fragment() {
-    private var user: EditText? = null
-    private var host: EditText? = null
-    private var password: EditText? = null
-    private var error: TextView? = null
+    private lateinit var submitButton: Button
+    private lateinit var viewModel: AuthViewModel
     private var listener: OnFragmentInteractionListener? = null
-    private val ERROR_MESSAGE = "Wrong data"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -25,22 +24,16 @@ class AuthFragment(val authReceiver: AuthReceiver) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        user = view?.findViewById(R.id.userInput)
-        host = view?.findViewById(R.id.hostInput)
-        password = view?.findViewById(R.id.passwordInput)
-        error = view?.findViewById(R.id.passwordInput)
+        val v = view;
+        if(v != null)
+        submitButton = v.findViewById(R.id.submit)
+        var mainBinding : Auth= DataBindingUtil.inflate(inflater, R.layout.fragment_auth,container,false)
+
+        submitButton.setOnClickListener {viewModel.submit()}
         return inflater.inflate(R.layout.fragment_auth, container, false)
     }
 
-    fun submit(){
-        if (!authReceiver.receiveAuth(
-                user.toString(),host.toString(),password.toString()))
-            signalError()
-    }
 
-    fun signalError(){
-        error?.text = ERROR_MESSAGE
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

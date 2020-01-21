@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_label">user</string>
+    <string name="host_label">host</string>
+    <string name="enter_user_label">Enter user</string>
+    <string name="enter_host_label">Enter host</string>
+    <string name="enter_password_label">Enter password</string>
+    <string name="PASSWORD_PREFERENCE">passwords</string>
+    <string name="HOST_PREFERENCE">hosts</string>
+    <string name="USER_PREFERENCE">users</string>
+    <string name="submit_label">Submit</string>
 </resources>
+

@@ -1,11 +1,13 @@
 package com.asi.sshclient
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.asi.sshclient.ui.main.MainFragment
 import com.jcraft.jsch.JSch
 import com.jcraft.jsch.JSchException
 import com.jcraft.jsch.UserInfo
+
 
 class MainActivity : AppCompatActivity(), AuthReceiver {
 
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity(), AuthReceiver {
             session.setPassword(password);
             session.userInfo = ui
             session.connect()
+
+            val a = getSharedPreferences("PREF", Context.MODE_PRIVATE)
             return true
         }catch (e: JSchException){
             return false

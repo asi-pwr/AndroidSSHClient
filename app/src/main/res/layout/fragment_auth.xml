@@ -6,7 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".AuthFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <data>
+        <variable
+            android:name="viewModel"
+            android:type="package com.asi.sshclient.AuthViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linerlayout"
@@ -17,95 +22,114 @@
         <TextView
             android:id="@+id/host"
             android:layout_width="66dp"
-            android:layout_height="23dp"
-            android:layout_gravity="1"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="host"
+            android:text="@string/host_label"
+            app:layout_constraintBottom_toBottomOf="@+id/hostInput"
             app:layout_constraintEnd_toStartOf="@+id/hostInput"
-            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="117dp" />
+            app:layout_constraintTop_toTopOf="@+id/hostInput"
+            app:layout_constraintVertical_bias="0.423" />
 
         <TextView
             android:id="@+id/user"
             android:layout_width="69dp"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="52dp"
-            android:text="user"
-            app:layout_constraintEnd_toStartOf="@+id/userInput"
+            android:text="@string/user_label"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordInput"
+            app:layout_constraintEnd_toStartOf="@+id/passwordInput"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/passwordInput"
+            app:layout_constraintVertical_bias="0.423" />
 
         <EditText
             android:id="@+id/userInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="96dp"
             android:ems="10"
-            android:hint="Enter user"
+            android:hint="@string/enter_user_label"
+            android:text="@={viewModel.user}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintTop_toBottomOf="@+id/error" />
 
         <EditText
             android:id="@+id/hostInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="108dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="96dp"
             android:ems="10"
-            android:hint="Enter host"
+            android:text="@={viewModel.host}"
+            android:hint="@string/enter_host_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintTop_toBottomOf="@+id/userInput" />
 
         <TextView
             android:id="@+id/password"
             android:layout_width="69dp"
-            android:layout_height="23dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="52dp"
-            android:text="user"
+            android:text="@string/user_label"
+            app:layout_constraintBottom_toBottomOf="@+id/userInput"
             app:layout_constraintEnd_toStartOf="@+id/userInput"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/userInput" />
 
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="172dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="96dp"
             android:ems="10"
-            android:hint="Enter password"
+            android:hint="@string/enter_password_label"
             android:inputType="textPassword"
+            android:text="@={viewModel.password}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></EditText>
+            app:layout_constraintTop_toBottomOf="@+id/hostInput" />
 
         <Button
             android:id="@+id/submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
             android:layout_marginTop="20dp"
-            android:onClick="submit"
-            android:text="Submit"
+            android:text="@string/submit_label"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+            app:layout_constraintStart_toStartOf="@+id/passwordInput"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/submit_label"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/passwordInput"
+            app:layout_constraintStart_toStartOf="@+id/passwordInput"
             app:layout_constraintTop_toBottomOf="@+id/passwordInput"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/error"
             android:layout_width="340dp"
-            android:layout_height="29dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
-            android:layout_marginTop="4dp"
-            android:text=""
+            android:layout_marginTop="16dp"
+            android:text="@={viewModel.error}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
