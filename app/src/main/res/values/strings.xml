@@ -18,5 +18,8 @@
     <string name="chooseserver_label">chooseServer</string>
     <string name="addlogin_label">addLogin</string>
     <string name="addshortcut_label">addShortcut</string>
+    <string name="connect_label">Connect</string>
+    <string name="pickserver_label">PickServer</string>
+    <string name="settings_label">Settings</string>
 </resources>
 

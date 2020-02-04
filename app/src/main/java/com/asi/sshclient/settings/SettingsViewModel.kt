@@ -6,14 +6,14 @@ import javax.inject.Inject
 
 class SettingsViewModel @Inject constructor(
     var authService: AuthService,
-    var serverService: ServerService
+    var serverSettingsService: ServerSettingsService
 ) : ViewModel() {
-    private lateinit var currentServer: Server
+    private lateinit var currentServerSettings: ServerSettings
     get
 
     fun changeCurrentServer(index: Int) {
         val auth = authService.getListOfAuthData()[index]
-        currentServer = serverService.getServerByAuth(auth)
+        currentServerSettings = serverSettingsService.getServerByAuth(auth)
     }
 
     fun modifySettings(index: Int) {

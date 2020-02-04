@@ -2,10 +2,9 @@ package com.asi.sshclient
 
 import android.content.Context
 import com.asi.sshclient.auth.*
-import com.asi.sshclient.settings.ServerService
-import com.asi.sshclient.settings.ServerServiceImpl
+import com.asi.sshclient.settings.ServerSettingsService
+import com.asi.sshclient.settings.ServerSettingsServiceImpl
 import com.asi.sshclient.settings.SettingsFragment
-import com.asi.sshclient.settings.SettingsViewModel
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -29,7 +28,7 @@ class ApplicationModule(val context: Context) {
     fun getAuthService(storage: AuthServiceImpl): AuthService = storage
 
     @Provides
-    fun getServerService(service: ServerServiceImpl): ServerService = service
+    fun getServerService(service: ServerSettingsServiceImpl): ServerSettingsService = service
 
 }
 
