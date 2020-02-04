@@ -12,5 +12,11 @@
     <string name="HOST_PREFERENCE">hosts</string>
     <string name="USER_PREFERENCE">users</string>
     <string name="submit_label">Submit</string>
+    <string name="title_activity_auth_list">AuthListActivity</string>
+    <string name="back_label">back</string>
+    <string name="password_label">password</string>
+    <string name="chooseserver_label">chooseServer</string>
+    <string name="addlogin_label">addLogin</string>
+    <string name="addshortcut_label">addShortcut</string>
 </resources>
 

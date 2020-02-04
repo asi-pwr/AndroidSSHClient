@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings.SettingsFragment">
+
+
+    <Button
+        android:id="@+id/chooseServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/chooseserver_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
+        android:text="@string/addlogin_label"
+        app:layout_constraintEnd_toEndOf="@+id/chooseServer"
+        app:layout_constraintStart_toStartOf="@+id/chooseServer"
+        app:layout_constraintTop_toBottomOf="@+id/chooseServer" />
+
+    <Button
+        android:id="@+id/addShortcut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="@string/addshortcut_label"
+        app:layout_constraintEnd_toEndOf="@+id/addLogin"
+        app:layout_constraintStart_toStartOf="@+id/addLogin"
+        app:layout_constraintTop_toBottomOf="@+id/addLogin" />
+</androidx.constraintlayout.widget.ConstraintLayout>

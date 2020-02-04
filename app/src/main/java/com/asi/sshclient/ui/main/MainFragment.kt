@@ -7,11 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import com.asi.sshclient.AuthReceiver
 import com.asi.sshclient.R
-import com.jcraft.jsch.JSch
-import com.jcraft.jsch.JSchException
-import com.jcraft.jsch.UserInfo
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -29,7 +25,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         test_button.setOnClickListener {
             viewModel.onButtonClick()
         }
@@ -39,7 +34,6 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if(::viewModel.isInitialized){
             viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
             viewModel.sampleLiveData.observe(this, Observer { t -> message.text = t })
         }
     }
