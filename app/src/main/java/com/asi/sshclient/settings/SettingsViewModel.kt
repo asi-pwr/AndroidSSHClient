@@ -12,7 +12,7 @@ class SettingsViewModel @Inject constructor(
     get
 
     fun changeCurrentServer(index: Int) {
-        val auth = authService.getListOfAuthData()[index]
+        val auth = authService.findAuthById(index)
         currentServer = serverService.getServerByAuth(auth)
     }
 
