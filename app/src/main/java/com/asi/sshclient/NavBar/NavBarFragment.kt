@@ -1,6 +1,7 @@
 package com.asi.sshclient.NavBar
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,9 +11,14 @@ import android.view.ViewGroup
 
 import com.asi.sshclient.R
 import kotlinx.android.synthetic.main.fragment_nav_bar.*
+import com.asi.sshclient.settings.AUTH_PASS_INDEX
+import java.lang.Exception
 
 class NavBarFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+    private val CHOOSE_SERVER = 1
+
+    private lateinit var viewModel: NavBarViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,39 +55,17 @@ class NavBarFragment : Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            CHOOSE_SERVER -> viewModel.changeCurrentAuth(
+                data?.getIntExtra(AUTH_PASS_INDEX, 0) ?: 0
+            )
+            else -> throw Exception()
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NavBarFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NavBarFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
     }
 }

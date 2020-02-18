@@ -10,6 +10,7 @@ data class AuthData(val host: String, val user: String, val password: String)
 interface AuthService {
     fun getListOfAuthData(): List<AuthData>
     fun addAuthData(data: AuthData)
+    fun findAuthById(id :Int):AuthData
 }
 
 @Singleton
@@ -30,6 +31,8 @@ class AuthServiceImpl @Inject constructor(var pref: SharedPreferences) : AuthSer
         return listOfLists.map { AuthData(it[0], it[1], it[2]) }
     }
 
+    override fun findAuthById(id :Int) =
+      getListOfAuthData()[id]
 
 }
 
