@@ -7,20 +7,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.asi.sshclient.MainActivity
 import com.asi.sshclient.MyApplication
 import com.asi.sshclient.R
-import com.asi.sshclient.auth.AuthFragment
 import com.asi.sshclient.auth.AuthListActivity
 import kotlinx.android.synthetic.main.settings_fragment.*
-import java.lang.Exception
 import javax.inject.Inject
 
-const val AUTH_PASS_INDEX = "server"
 
 class SettingsFragment : Fragment() {
 
-    private val CHOOSE_SERVER = 1
 
     @Inject
     lateinit var viewModel: SettingsViewModel
@@ -40,7 +35,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chooseServer.setOnClickListener { startAuthList() }
+        chooseServer.setOnClickListener { AuthListActivity.startAuthList(this) }
         addLogin.setOnClickListener { switchFragment() }
         addShortcut.setOnClickListener { addShortcut() }
     }
@@ -53,18 +48,8 @@ class SettingsFragment : Fragment() {
         //TODO redirect to shorcut fragment when addShortcut functionality is compeleted
     }
 
-    private fun startAuthList() {
-        val intent = Intent(activity, AuthListActivity::class.java)
-        startActivityForResult(intent, CHOOSE_SERVER);
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            CHOOSE_SERVER -> viewModel.changeCurrentServer(
-                data?.getIntExtra(AUTH_PASS_INDEX, 0) ?: 0
-            )
-            else -> throw Exception()
-        }
+        AuthListActivity.receiveAuthIndex(viewModel::changeCurrentServer,requestCode,resultCode,data)
     }
 
     override fun onAttach(context: Context) {

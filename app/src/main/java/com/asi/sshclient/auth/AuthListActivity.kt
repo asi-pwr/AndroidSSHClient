@@ -15,14 +15,17 @@ import android.content.Intent
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.asi.sshclient.settings.AUTH_PASS_INDEX
 
 
-interface AuthListener{
-    fun onClick(position:Int)
+interface AuthListener {
+    fun onClick(position: Int)
 }
 
-class AuthListActivity() : AppCompatActivity(),AuthListener {
+class AuthListActivity() : AppCompatActivity(), AuthListener {
 
     @Inject
     lateinit var authService: AuthService
@@ -33,7 +36,10 @@ class AuthListActivity() : AppCompatActivity(),AuthListener {
         (application as MyApplication).appComponent.inject(this)
         val rvAuthList = findViewById(R.id.auth_list) as RecyclerView
         val authList = authService.getListOfAuthData()
-        val adapter = AuthAdapter(authList.toTypedArray() + AuthData("a","b","c") + AuthData("d","e","f"),this)
+        val adapter = AuthAdapter(
+            authList.toTypedArray() + AuthData("a", "b", "c") + AuthData("d", "e", "f"),
+            this
+        )
         rvAuthList.adapter = adapter
         rvAuthList.layoutManager = LinearLayoutManager(this)
     }
@@ -45,5 +51,21 @@ class AuthListActivity() : AppCompatActivity(),AuthListener {
         finish()
     }
 
+    companion object {
+        private const val CHOOSE_SERVER = 43
+        private const val AUTH_PASS_INDEX = "server"
 
+        val receiveAuthIndex = { func : (Int) -> Unit, requestCode: Int, resultCode: Int, data: Intent?  ->
+            if (requestCode == CHOOSE_SERVER)
+                func(
+                    data?.getIntExtra(AUTH_PASS_INDEX,0) ?: 0
+                )
+        }
+
+        val startAuthList = {fragment:Fragment->
+            val intent = Intent(fragment.activity, AuthListActivity::class.java)
+            fragment.startActivityForResult(intent,CHOOSE_SERVER)
+        }
+    }
 }
+

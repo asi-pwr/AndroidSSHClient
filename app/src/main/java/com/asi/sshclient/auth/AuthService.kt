@@ -9,6 +9,7 @@ data class AuthData(val host: String, val user: String, val password: String)
 @Singleton
 interface AuthService {
     fun getListOfAuthData(): List<AuthData>
+    fun getAuthDataById(id: Int): AuthData?
     fun addAuthData(data: AuthData)
     fun findAuthById(id :Int):AuthData
 }
@@ -22,6 +23,12 @@ class AuthServiceImpl @Inject constructor(var pref: SharedPreferences) : AuthSer
         with(pref.edit()) {
             putStringSet(PASSES_PREFERENCE, passwords)
             apply()
+        }
+    }
+
+    override fun getAuthDataById(id: Int): AuthData? {
+        return  getListOfAuthData().run{
+            if (size > id) get(id) else null
         }
     }
 

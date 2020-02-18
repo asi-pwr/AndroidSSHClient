@@ -16,6 +16,7 @@ class NavBarViewModel @Inject constructor(
     private lateinit var currentAuthData: AuthData
     private lateinit var currentSettings: ServerSettings
     private val NOT_INITIALIZED = "please choose passes"
+    private val NO_SUCH_AUTH = "no such auth"
 
     fun connect() {
         if (::currentAuthData.isInitialized && ::currentSettings.isInitialized) {
@@ -25,5 +26,13 @@ class NavBarViewModel @Inject constructor(
 
     fun changeCurrentAuth(id: Int) {
         authService.findAuthById(id)
+    }
+
+    fun changeData(authDataId: Int){
+        val data = authService.getAuthDataById(authDataId)
+        if (data != null){
+            currentAuthData = data
+            currentSettings = settingsService.getServerByAuth(data)
+        }else alertFunction(NO_SUCH_AUTH)
     }
 }

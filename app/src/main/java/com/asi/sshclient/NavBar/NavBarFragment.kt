@@ -8,21 +8,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.asi.sshclient.R
+import com.asi.sshclient.auth.AuthListActivity
 import kotlinx.android.synthetic.main.fragment_nav_bar.*
 import com.asi.sshclient.settings.AUTH_PASS_INDEX
 import java.lang.Exception
+import javax.inject.Inject
 
 class NavBarFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private val CHOOSE_SERVER = 1
 
-    private lateinit var viewModel: NavBarViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    lateinit var viewModel: NavBarViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,12 +30,8 @@ class NavBarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        connect.setOnClickListener { connect() }
-        pickServer.setOnClickListener {  }
-    }
-
-    fun connect(){
-        //TODO plug here implementation of jschell connect
+        connect.setOnClickListener { viewModel.connect() }
+        pickServer.setOnClickListener { AuthListActivity.startAuthList(this) }
     }
 
     override fun onAttach(context: Context) {
@@ -56,16 +49,21 @@ class NavBarFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            CHOOSE_SERVER -> viewModel.changeCurrentAuth(
-                data?.getIntExtra(AUTH_PASS_INDEX, 0) ?: 0
-            )
-            else -> throw Exception()
-        }
+        AuthListActivity.receiveAuthIndex(
+            viewModel::changeCurrentAuth,
+            requestCode,
+            resultCode,
+            data
+        )
     }
 
-interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
+
+    fun pickServer() {
+        //TODO
+    }
+
 }
