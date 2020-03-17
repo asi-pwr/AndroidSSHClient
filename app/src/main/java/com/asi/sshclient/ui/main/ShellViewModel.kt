@@ -4,33 +4,37 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ShellViewModel : ViewModel() {
-    var command = StringBuffer()
+    private var command = StringBuffer()
+    var commandLiveData = MutableLiveData<String>(command.toString())
         private set
     //'_' is used to indicate cursor position
-    var shellContent = StringBuffer("_")
+    private var shellContent = StringBuffer("_")
+    var shellContentLiveData = MutableLiveData<String>(shellContent.toString())
         private set
-    var shellLiveData = MutableLiveData<String>(shellContent.toString())
 
-    fun onEnterKey(){
-        if(command.isNotBlank()) {
-            command = StringBuffer()
-            //TODO send command to ssh service
-        }
+    fun onEnterKey() {
+        commandLiveData.postValue(command.toString())
+        command = StringBuffer()
         shellContent.insert(shellContent.length - 1, "\n")
-        shellLiveData.postValue(shellContent.toString())
+        shellContentLiveData.postValue(shellContent.toString())
     }
 
-    fun writeSign(text : String) {
+    fun writeSign(text: String) {
         command.append(text)
-        shellContent.insert(shellContent.length-1, text)
-        shellLiveData.postValue(shellContent.toString())
+        shellContent.insert(shellContent.length - 1, text)
+        shellContentLiveData.postValue(shellContent.toString())
+    }
+
+    fun receiveFromShell(text: String) {
+        shellContent.insert(shellContent.length - 1, text)
+        shellContentLiveData.postValue(shellContent.toString())
     }
 
     fun removeSign() {
-        if(command.isEmpty())
+        if (command.isEmpty())
             return
-        command.delete(command.length-1, command.length)
-        shellContent.delete(shellContent.length-2, shellContent.length-1)
-        shellLiveData.postValue(shellContent.toString())
+        command.delete(command.length - 1, command.length)
+        shellContent.delete(shellContent.length - 2, shellContent.length - 1)
+        shellContentLiveData.postValue(shellContent.toString())
     }
 }
