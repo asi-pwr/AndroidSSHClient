@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
 
-
     @Inject
     lateinit var viewModel: SettingsViewModel
     private var listener : SettingsFragmentListener? = null
@@ -61,7 +60,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    override fun onDetach() {
+    override fun onDetach(){
         super.onDetach()
         listener = null
     }

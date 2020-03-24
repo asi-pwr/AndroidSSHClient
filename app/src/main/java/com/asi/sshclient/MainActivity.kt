@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity(),
                 .addToBackStack(null)
                 .commit()
         }
-        val `asdsa` = "aaa"
     }
 
     fun replaceFragment(fragment: Fragment) {

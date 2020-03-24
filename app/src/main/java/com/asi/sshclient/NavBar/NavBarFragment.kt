@@ -11,13 +11,11 @@ import android.view.ViewGroup
 import com.asi.sshclient.R
 import com.asi.sshclient.auth.AuthListActivity
 import kotlinx.android.synthetic.main.fragment_nav_bar.*
-import com.asi.sshclient.settings.AUTH_PASS_INDEX
 import java.lang.Exception
 import javax.inject.Inject
 
 class NavBarFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
-    private val CHOOSE_SERVER = 1
 
     lateinit var viewModel: NavBarViewModel
 
